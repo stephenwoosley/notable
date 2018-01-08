@@ -31,4 +31,38 @@ module.exports = function(app, db) {
       }
     })
   });
+  // delete route to /notes/id
+  app.delete('/notes/:id', (req, res) => {
+    // id is pulled from the url params
+    const id = req.params.id;
+    // set details to a copy of the id field from mongodb, using the const ObjectID to create a new id object
+    const details = { '_id' : new ObjectID(id) };
+    // use the db object passed into the exported function to find the notes collection, then find the id equal to the details object as defined above
+    db.collection('notes').remove(details, (err, item) => {
+      if (err) {
+        res.send({'error':'An error has occurred'});
+      } else {
+        // send the item (with ID matched) found to the requester
+        res.send('Note ' + id + ' deleted!');
+      }
+    })
+  });
+  // put request to notes/id
+  app.put('/notes/:id', (req, res) => {
+    // get id from the url
+    const id = req.params.id;
+    // details of the note via a copy of the object 
+    const details = { '_id': new ObjectID(id)};
+    // set note to the content of the request.body
+    const note = { text: req.body.body, title: req.body.title};
+    // update the note at the corresponding ID to the content of the req.body of the request
+    db.collection('notes').update(details, note, (err, result) => {
+      if (err) {
+        res.send({'error':'An error has occured'});
+      } else {
+        // send the resulting note to the requester
+        res.send(note);
+      }
+    });
+  });
 };
