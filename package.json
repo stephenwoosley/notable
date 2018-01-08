@@ -1,0 +1,27 @@
+{
+  "name": "notable",
+  "version": "1.0.0",
+  "description": "basic notes api",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephenwoosley/notable.git"
+  },
+  "author": "Stephen Woosley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephenwoosley/notable/issues"
+  },
+  "homepage": "https://github.com/stephenwoosley/notable#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.16"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.9"
+  }
+}
